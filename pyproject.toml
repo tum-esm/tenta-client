@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "tenta"
+version = "0.1.0"
+description = ""
+authors = ["Moritz Makowski <moritz@dostuffthatmatters.dev>"]
+readme = "README.md"
+packages = [{ include = "tenta" }]
+repository = "https://github.com/tum-esm/tenta-client"
+license = "AGPL-3.0-only"
+
+[tool.poetry.dependencies]
+python = "^3.8,<4.0"
+paho-mqtt = "^1.6.1"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.9.1"
+mypy = "^1.5.1"
+pytest = "^7.4.2"
+pytest-cov = "^4.1.0"
+types-paho-mqtt = "^1.6.0.7"
+pytest-order = "^1.1.0"
+pydoc-markdown = "^4.8.2"
+
+[tool.mypy]
+strict = true
+implicit_reexport = true
+no_warn_unused_ignores = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
