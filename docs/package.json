@@ -1,0 +1,30 @@
+{
+  "name": "tenta-python-client-docs",
+  "version": "0.1.0",
+  "contributors": [
+    {
+      "name": "Moritz Makowski",
+      "email": "moritz.makowski@tum.de"
+    }
+  ],
+  "license": "AGPL-3.0-only",
+  "repository": "https://github.com/iterize/tenta",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.15",
+    "next": "^13.4.19",
+    "nextra": "^2.12.3",
+    "nextra-theme-docs": "^2.12.3",
+    "postcss": "^8.4.29",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.6.0",
+    "typescript": "^5.2.2"
+  }
+}
