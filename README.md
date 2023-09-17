@@ -67,3 +67,5 @@ tenta_client.teardown()
 **Open-Source:** Issues and Pull Requests are welcome! Every PR undergoes a review process to ensure quality and semantic versioning.
 
 **Testing:** The library is statically typed and is strictly checked using [Mypy](https://github.com/python/mypy). The tests cover publishing all message types, receiving configuration messages and connecting to the MQTT broker with and without TLS encryption with valid and invalid connection details.
+
+**Documentation:** The documentation is built using [Nextra](https://nextra.site/) and [Pydoc-Markdown](https://github.com/NiklasRosenstein/pydoc-markdown).
