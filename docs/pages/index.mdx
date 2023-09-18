@@ -1,5 +1,10 @@
 # Tenta Python Client
 
+[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/tum-esm/tenta-client/test.yml?label=tests%20on%20main%20branch)](https://github.com/tum-esm/tenta-client/actions/workflows/test.yml)
+[![GitHub](https://img.shields.io/github/license/tum-esm/tenta-client?color=f1f5f9)](https://github.com/tum-esm/tenta-client/blob/main/LICENSE.md)
+[![PyPI - Version](https://img.shields.io/github/v/tag/tum-esm/tenta-client?label=version&color=f1f5f9)](https://pypi.org/project/tenta)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/tenta?label=supported%20Python%20versions&color=f1f5f9)](https://pypi.org/project/tenta)
+
 This is a Python client library for [Tenta](https://github.com/iterize/tenta), a sensor network management tool. This library uses [Paho MQTT](https://github.com/eclipse/paho.mqtt.python) to communicate with a Tenta server connected to the same broker. The library provides type-safe interfaces to create an MQTT client, send messages (logs, measurements, and acknowledgments) to the server, and receive parameters (configuration messages) from the server.
 
 Please contact [Moritz Makowski](mailto:moritz.makowski@tum.de) if you have any questions or feedback that goes beyond the scope of a GitHub issue. The documentation for this client library is hosted at [tenta-python-client.onrender.com](https://tenta-python-client.onrender.com).

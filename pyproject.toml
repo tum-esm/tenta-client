@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tenta"
-version = "0.1.0"
+version = "0.1.0-rc.1"
 description = "Python client library for Tenta, a sensor network management tool"
 authors = ["Moritz Makowski <moritz.makowski@tum.de>"]
 readme = "README.md"
