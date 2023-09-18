@@ -67,7 +67,7 @@ export default {
       </span>
     ),
   },
-  faviconGlyph: "🐙",
+  faviconGlyph: "🏔️",
   toc: {
     float: true,
   },
