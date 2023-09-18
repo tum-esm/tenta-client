@@ -1,16 +1,14 @@
-# 🐙 Tenta Python Client
+# Tenta Python Client
 
-This is a Python client library for [Tenta](https//github.com/iterize/tenta), a sensor network management tool. This library uses [Paho MQTT](https://github.com/eclipse/paho.mqtt.python) to communicate with a Tenta server connected to the same broker. The library provides type-safe interfaces to create an MQTT client, send out messages (logs, measurements, and acknowledgements) to the server and receive parameters (configuration messages) from the server.
+This is a Python client library for [Tenta](https://github.com/iterize/tenta), a sensor network management tool. This library uses [Paho MQTT](https://github.com/eclipse/paho.mqtt.python) to communicate with a Tenta server connected to the same broker. The library provides type-safe interfaces to create an MQTT client, send messages (logs, measurements, and acknowledgments) to the server, and receive parameters (configuration messages) from the server.
 
-Please contact [Moritz Makowski](moritz.makowski@tum.de) if you have any questions or feedback that goes beyong the scope of a GitHub issue.
-
-The documentation for this client library can be found at [tenta-python-client.onrender.com](https://tenta-python-client.onrender.com).
+Please contact [Moritz Makowski](mailto:moritz.makowski@tum.de) if you have any questions or feedback that goes beyond the scope of a GitHub issue. The documentation for this client library is hosted at [tenta-python-client.onrender.com](https://tenta-python-client.onrender.com).
 
 <br/>
 
 ## Usage
 
-1. Install it with Pip or [Poetry](https://github.com/python-poetry/poetry)
+Install it with Pip or [Poetry](https://github.com/python-poetry/poetry):
 
 ```bash
 pip install tenta
@@ -18,7 +16,7 @@ pip install tenta
 poetry add tenta
 ```
 
-2. Start using it
+Import and use it in your project:
 
 ```python
 import tenta
@@ -62,20 +60,18 @@ config_message: typing.Optional[
 tenta_client.teardown()
 ```
 
-1. Read the [documentation](https://tenta-python-client.onrender.com) to learn about all the client features
-
 <br/>
 
 ## About
 
-**Why does this client exist?** The Tenta specification of how sensor should publish their data is very concise. Still in order to actually use Tenta in a project, one needs to write code that sends out these messages via an Python MQTT library, like Paho. This is not that much code, but need to be implemented, documented and tested in every single Project that wants to use Tenta. Hence, this client library is fully tested, documented and makes onboarding to Tenta significantly easier.
+**Why does this client exist?** The Tenta specification of how a sensor should publish its data is simple, but to actually use Tenta in a project, one needs to write code that sends out these messages via a Python MQTT library, like Paho. This implementation code is relatively simple but needs to be written, documented, and tested in every single project that wants to use Tenta. This client library is thoroughly tested and documented. Hence, it makes onboarding to Tenta significantly easier.
 
 **Compatibility:** Client library version `0.X.*` will be compatible with the Tenta specification `0.X.*`. Client library versions `Y.*.*` will be compatible with Tenta specification `Y.*.*`.
 
-**Adhering to semantic versioning:** The same function calls will produce the same MQTT messages within non-breaking releases, i.e. the function call `tenta_client.function(args)` will produce the same MQTT messages in library versions `0.1.0` and `0.1.3` even if the Tenta specification provides a new feature in `0.1.3`. New non-breaking features in Tenta will alway be opt-in, i.e. `tenta_client.function(args, enable_new_feature=True)´ will opt-into that new feature. This way, the behaviour of sensors does not change with the same code even if they upgrade to non-breaking client library releases (automatically).
+**Adhering to semantic versioning:** The same function calls will produce the same MQTT messages within non-breaking releases, i.e., the function call `tenta_client.function(args)` will produce the same MQTT messages in library versions `0.1.0` and `0.1.3` even if the Tenta specification provides a new feature in `0.1.3`. New non-breaking features in Tenta will always be opt-in, i.e., `tenta_client.function(args, enable_new_feature=True)` will opt into that new feature. This way, the behavior of sensors does not change with the same code even if they upgrade to non-breaking client library releases (automatically).
 
 **Open-Source:** Issues and Pull Requests are welcome! Every PR undergoes a review process to ensure quality and semantic versioning.
 
-**Testing:** The library is statically typed and is strictly checked using [Mypy](https://github.com/python/mypy). The tests cover publishing all message types, receiving configuration messages and connecting to the MQTT broker with and without TLS encryption with valid and invalid connection details. The tests are run for all supported Python versions (3.8, 3.9, 3.10, 3.11).
+**Testing:** The library is statically typed and is strictly checked using [Mypy](https://github.com/python/mypy). The tests cover publishing all message types, receiving configuration messages, and connecting to the MQTT broker with and without TLS encryption with valid and invalid connection details. The tests run for all supported Python versions (3.8, 3.9, 3.10, 3.11).
 
 **Documentation:** The documentation is built using [Nextra](https://nextra.site/) and [Pydoc-Markdown](https://github.com/NiklasRosenstein/pydoc-markdown).

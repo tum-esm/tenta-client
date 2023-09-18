@@ -8,7 +8,7 @@ INDEX_SRC = os.path.join(PROJECT_DIR, "README.md")
 INDEX_DST = os.path.join(PROJECT_DIR, "docs", "pages", "index.mdx")
 EXAMPLE_SRC = os.path.join(PROJECT_DIR, "example.py")
 EXAMPLE_DST = os.path.join(PROJECT_DIR, "docs", "pages", "examples.mdx")
-API_DST = os.path.join(PROJECT_DIR, "docs", "pages", "api.mdx")
+API_DST = os.path.join(PROJECT_DIR, "docs", "pages", "api-reference.mdx")
 
 
 # copy index file to docs folder

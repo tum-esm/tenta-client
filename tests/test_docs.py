@@ -11,7 +11,7 @@ import pytest
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS_PAGES_DIR = os.path.join(PROJECT_DIR, "docs", "pages")
-FILENAMES = ["index.mdx", "examples.mdx", "api.mdx"]
+FILENAMES = ["index.mdx", "examples.mdx", "api-reference.mdx"]
 
 
 @pytest.mark.order(4)

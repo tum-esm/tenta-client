@@ -1,6 +1,7 @@
 {
   "name": "tenta-python-client-docs",
   "version": "0.1.0",
+  "description": "Documentation of the Python client library for Tenta, a sensor network management tool",
   "contributors": [
     {
       "name": "Moritz Makowski",

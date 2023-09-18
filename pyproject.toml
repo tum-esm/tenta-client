@@ -1,11 +1,12 @@
 [tool.poetry]
 name = "tenta"
 version = "0.1.0"
-description = ""
-authors = ["Moritz Makowski <moritz@dostuffthatmatters.dev>"]
+description = "Python client library for Tenta, a sensor network management tool"
+authors = ["Moritz Makowski <moritz.makowski@tum.de>"]
 readme = "README.md"
 packages = [{ include = "tenta" }]
 repository = "https://github.com/tum-esm/tenta-client"
+documentation = "https://tenta-python-client.onrender.com"
 license = "AGPL-3.0-only"
 
 [tool.poetry.dependencies]
