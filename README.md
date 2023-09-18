@@ -4,9 +4,13 @@ This is a Python client library for [Tenta](https//github.com/iterize/tenta), a 
 
 Please contact [Moritz Makowski](moritz.makowski@tum.de) if you have any questions or feedback that goes beyong the scope of a GitHub issue.
 
+The documentation for this client library can be found at [tenta-python-client.onrender.com](https://tenta-python-client.onrender.com).
+
+<br/>
+
 ## Usage
 
-Install it with Pip or [Poetry](https://github.com/python-poetry/poetry):
+1. Install it with Pip or [Poetry](https://github.com/python-poetry/poetry)
 
 ```bash
 pip install tenta
@@ -14,24 +18,23 @@ pip install tenta
 poetry add tenta
 ```
 
-Start using it:
+2. Start using it
 
 ```python
+import tenta
+
+# connect to the MQTT broker
+
 tenta_client = tenta.TentaClient(
-    # MQTT broker connection parameters
     mqtt_host="test.mosquitto.org",
     mqtt_port=1884,
     mqtt_identifier="rw",
     mqtt_password="readwrite",
-
-    # the sensor identifier (from the Tenta Dashboard)
     sensor_identifier="81b...",
-
-    # subscribe to configuration messages (created in the Tenta Dashboard)
-    receive_configs=True,
 )
 
-# Publish log or measurement messages
+# publish log or measurement messages
+
 tenta_client.publish(
     tenta.LogMessage(severity="info", message="Hello, to you!")
 )
@@ -44,17 +47,24 @@ tenta_client.publish(
     )
 )
 
-# Wait for the client to publish all messages
+# wait for the client to publish all messages
+
 tenta_client.wait_for_publish()
 
 # check if a new configuration message has arrived
+
 config_message: typing.Optional[
     tenta.ConfigurationMessage
 ] = tenta_client.get_latest_received_config_message()
 
 # disconnect from the MQTT broker
+
 tenta_client.teardown()
 ```
+
+1. Read the [documentation](https://tenta-python-client.onrender.com) to learn about all the client features
+
+<br/>
 
 ## About
 
@@ -66,6 +76,6 @@ tenta_client.teardown()
 
 **Open-Source:** Issues and Pull Requests are welcome! Every PR undergoes a review process to ensure quality and semantic versioning.
 
-**Testing:** The library is statically typed and is strictly checked using [Mypy](https://github.com/python/mypy). The tests cover publishing all message types, receiving configuration messages and connecting to the MQTT broker with and without TLS encryption with valid and invalid connection details.
+**Testing:** The library is statically typed and is strictly checked using [Mypy](https://github.com/python/mypy). The tests cover publishing all message types, receiving configuration messages and connecting to the MQTT broker with and without TLS encryption with valid and invalid connection details. The tests are run for all supported Python versions (3.8, 3.9, 3.10, 3.11).
 
 **Documentation:** The documentation is built using [Nextra](https://nextra.site/) and [Pydoc-Markdown](https://github.com/NiklasRosenstein/pydoc-markdown).
