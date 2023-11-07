@@ -137,7 +137,7 @@ tenta_client.teardown()
 #
 # You can pass **callbacks** to the client to get notified when a message has
 # been published successfully or when the client receives a new config message.
-# 
+#
 # You can also check the current **length of the clients message queue** =
 # number of messages that have not been published yet. When offline, a full
 # queue might raise Exceptions.

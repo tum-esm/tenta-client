@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "tenta"
-version = "0.1.1"
+version = "0.1.2"
 description = "Python client library for Tenta, a sensor network management tool"
 authors = ["Moritz Makowski <moritz.makowski@tum.de>"]
 readme = "README.md"
 packages = [{ include = "tenta" }]
 repository = "https://github.com/tum-esm/tenta-client"
 documentation = "https://tenta-python-client.onrender.com"
-license = "AGPL-3.0-only"
+license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8,<4.0"
@@ -17,18 +17,25 @@ paho-mqtt = "^1.6.1"
 optional = true
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.9.1"
 mypy = "^1.5.1"
 pytest = "^7.4.2"
 pytest-cov = "^4.1.0"
 types-paho-mqtt = "^1.6.0.7"
 pytest-order = "^1.1.0"
 pydoc-markdown = "^4.8.2"
+yapf = "^0.40.2"
 
 [tool.mypy]
 strict = true
 implicit_reexport = true
 no_warn_unused_ignores = true
+
+[tool.yapf]
+based_on_style = "facebook"
+coalesce_brackets = true
+split_before_dict_set_generator = true
+each_dict_entry_on_separate_line = false
+spaces_around_subscript_colon = true
 
 [build-system]
 requires = ["poetry-core"]

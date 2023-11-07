@@ -32,7 +32,8 @@ class TentaClient:
         connection_timeout: int = 8,
         sensor_identifier: Optional[str] = None,
         receive_configs: bool = True,
-        on_config_message: Optional[Callable[[ConfigurationMessage], None]] = None,
+        on_config_message: Optional[Callable[[ConfigurationMessage],
+                                             None]] = None,
         on_publish: Optional[Callable[[int], None]] = None,
         tls_context: Optional[ssl.SSLContext] = None,
         tls_parameters: Optional[TLSParameters] = None,
@@ -76,7 +77,9 @@ class TentaClient:
         """
 
         if TentaClient.instance is not None:
-            raise RuntimeError("There can only be one TentaClient instance per process")
+            raise RuntimeError(
+                "There can only be one TentaClient instance per process"
+            )
 
         TentaClient.instance = self
 
@@ -109,7 +112,9 @@ class TentaClient:
         # connect to the MQTT broker and raise a `ConnectionError` if
         # the connection fails or times out (default: after 8 seconds)
         self.client.on_connect = _on_connect
-        self.client.username_pw_set(username=mqtt_identifier, password=mqtt_password)
+        self.client.username_pw_set(
+            username=mqtt_identifier, password=mqtt_password
+        )
         try:
             # when the host is correct but the port is wrong, this connection
             # will take some time (~ 6 seconds) but since it is inside a low
@@ -132,18 +137,16 @@ class TentaClient:
                 else:
                     if TentaClient.connection_rc_code == 0:
                         break
-                    raise Exception(
-                        {
-                            1: "incorrect protocol",
-                            2: "invalid client id",
-                            3: "server unavailable",
-                            4: "bad username or password",
-                            5: "not authorised",
-                        }.get(
-                            TentaClient.connection_rc_code,
-                            f"unknown error code: {TentaClient.connection_rc_code}",
-                        )
-                    )
+                    raise Exception({
+                        1: "incorrect protocol",
+                        2: "invalid client id",
+                        3: "server unavailable",
+                        4: "bad username or password",
+                        5: "not authorised",
+                    }.get(
+                        TentaClient.connection_rc_code,
+                        f"unknown error code: {TentaClient.connection_rc_code}",
+                    ))
         except Exception as e:
             raise ConnectionError(
                 f"Could not connect to MQTT broker at {mqtt_host}:{mqtt_port} ({e})"
@@ -199,8 +202,8 @@ class TentaClient:
         if self.receive_configs:
             if self.sensor_identifier is None:
                 raise ValueError(
-                    "You must specify a sensor identifier if "
-                    + "you want to receive configurations"
+                    "You must specify a sensor identifier if " +
+                    "you want to receive configurations"
                 )
             self.client.subscribe(f"configurations/{self.sensor_identifier}")
             self.client.on_message = _on_config_message
@@ -252,21 +255,25 @@ class TentaClient:
             List[MeasurementMessage],
             List[AcknowledgmentMessage],
         ] = (
-            messages if isinstance(messages, list) else [messages]  # type: ignore
+            messages
+            if isinstance(messages, list) else [messages]  # type: ignore
         )
 
         if all([isinstance(message, LogMessage) for message in message_list]):
             topic = f"logs/{self.sensor_identifier}"
-        elif all([isinstance(message, MeasurementMessage) for message in message_list]):
+        elif all([
+            isinstance(message, MeasurementMessage) for message in message_list
+        ]):
             topic = f"measurements/{self.sensor_identifier}"
-        elif all(
-            [isinstance(message, AcknowledgmentMessage) for message in message_list]
-        ):
+        elif all([
+            isinstance(message, AcknowledgmentMessage)
+            for message in message_list
+        ]):
             topic = f"acknowledgments/{self.sensor_identifier}"
         else:
             raise ValueError(
-                "All messages must be of the same type (LogMessage, "
-                + "MeasurementMessage or AcknowledgmentMessage)"
+                "All messages must be of the same type (LogMessage, " +
+                "MeasurementMessage or AcknowledgmentMessage)"
             )
 
         current_timestamp = time.time()
@@ -274,19 +281,13 @@ class TentaClient:
         with TentaClient.thread_lock:
             mqtt_message_info = self.client.publish(
                 topic=topic,
-                payload=json.dumps(
-                    [
-                        {
-                            **m.__dict__,
-                            "timestamp": (
-                                m.timestamp
-                                if (m.timestamp is not None)
-                                else current_timestamp
-                            ),
-                        }
-                        for m in message_list
-                    ]
-                ),
+                payload=json.dumps([{
+                    **m.__dict__,
+                    "timestamp": (
+                        m.timestamp if
+                        (m.timestamp is not None) else current_timestamp
+                    ),
+                } for m in message_list]),
             )
             TentaClient.active_message_ids.add(mqtt_message_info.mid)
 

@@ -5,7 +5,6 @@ from typing import Any, Literal, Optional, Union, Dict
 class ConfigurationMessage:
     """A configuration message published by the server. Used by the `TentaClient`
     class to produce a typed object for received configs."""
-
     def __init__(
         self,
         revision: int,
@@ -24,7 +23,6 @@ class ConfigurationMessage:
 
 class LogMessage:
     """A log message published by the client."""
-
     def __init__(
         self,
         severity: Literal["info", "warning", "error"],
@@ -50,7 +48,6 @@ class LogMessage:
 
 class MeasurementMessage:
     """A measurement message published by the client."""
-
     def __init__(
         self,
         value: Dict[str, Union[float, int]],
@@ -73,7 +70,6 @@ class MeasurementMessage:
 
 class AcknowledgmentMessage:
     """An acknowledgment message published by the client."""
-
     def __init__(
         self,
         revision: int,
@@ -97,7 +93,6 @@ class AcknowledgmentMessage:
 class TLSParameters:
     """TLS parameters for the MQTT connection. Passed as
     is to `paho.mqtt.client.Client.tls_set`."""
-
     def __init__(
         self,
         ca_certs: Optional[str] = None,
