@@ -7,7 +7,7 @@
 
 This is a Python client library for [Tenta](https://github.com/iterize/tenta), a sensor network management tool. This library uses [Paho MQTT](https://github.com/eclipse/paho.mqtt.python) to communicate with a Tenta server connected to the same broker. The library provides type-safe interfaces to create an MQTT client, send messages (logs, measurements, and acknowledgments) to the server, and receive parameters (configuration messages) from the server.
 
-Please contact [Moritz Makowski](mailto:moritz.makowski@tum.de) if you have any questions or feedback that goes beyond the scope of a GitHub issue. The documentation for this client library is hosted at [tenta-python-client.onrender.com](https://tenta-python-client.onrender.com).
+Please contact [Moritz Makowski](mailto:moritz.makowski@tum.de) if you have any questions or feedback that goes beyond the scope of a GitHub issue. The documentation for this client library is hosted at [tenta-python-client.netlify.app](https://tenta-python-client.netlify.app).
 
 <br/>
 

@@ -6,7 +6,7 @@ authors = ["Moritz Makowski <moritz.makowski@tum.de>"]
 readme = "README.md"
 packages = [{ include = "tenta" }]
 repository = "https://github.com/tum-esm/tenta-client"
-documentation = "https://tenta-python-client.onrender.com"
+documentation = "https://tenta-python-client.netlify.app/"
 license = "MIT"
 
 [tool.poetry.dependencies]
