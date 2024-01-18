@@ -29,6 +29,7 @@ class TentaClient:
         mqtt_port: int,
         mqtt_identifier: str,
         mqtt_password: str,
+        mqtt_client_id: Optional[str] = "",
         connection_timeout: int = 8,
         sensor_identifier: Optional[str] = None,
         receive_configs: bool = True,
@@ -83,7 +84,7 @@ class TentaClient:
 
         TentaClient.instance = self
 
-        self.client = paho.mqtt.client.Client()
+        self.client = paho.mqtt.client.Client(client_id=mqtt_client_id)
         self.sensor_identifier = sensor_identifier
         self.receive_configs = receive_configs
 
