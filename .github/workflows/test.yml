@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version: ["3.8", "3.9", "3.10", "3.11"]
+        python_version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
     defaults:
       run:
         shell: bash
@@ -28,32 +28,15 @@ jobs:
     steps:
       # check-out repo and install python
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python_version }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python_version }}
+          cache: pip
 
-      # load cache if available
-      - name: Load cached venv
-        id: cached-venv
-        uses: actions/cache@v3
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ matrix.python_version }}-${{ hashFiles('poetry.lock') }}
-
-      # install poetry if venv not in cache
-      - name: Install Poetry
-        if: steps.cached-venv.outputs.cache-hit != 'true'
-        uses: snok/install-poetry@v1
-        with:
-          version: 1.6.1
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-          installer-parallel: true
       - name: Install dependencies
-        if: steps.cached-venv.outputs.cache-hit != 'true'
-        run: poetry install --with=dev
+        run: pip install ".[dev]"
 
       # Install mosquitto dependencies
       - name: Install mosquitto dependencies
@@ -65,5 +48,4 @@ jobs:
       # run test suite
       - name: Run pytests
         run: |
-          source .venv/bin/activate
-          pytest --verbose --cov=tenta --cov-report=term-missing tests
+          pytest --verbose --cov=tenta --cov-report=term-missing tests/
