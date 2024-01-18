@@ -5,14 +5,16 @@ on:
     paths:
       - tenta/**
       - tests/**
-      - poetry.lock
+      - docs/**
+      - pdm.lock
       - pyproject.toml
       - .github/workflows/test.yml
   pull_request:
     paths:
       - tenta/**
       - tests/**
-      - poetry.lock
+      - docs/**
+      - pdm.lock
       - pyproject.toml
       - .github/workflows/test.yml
 jobs:
