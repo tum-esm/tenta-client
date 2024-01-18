@@ -1,34 +1,33 @@
-[tool.poetry]
+[project]
 name = "tenta"
 version = "0.1.2"
 description = "Python client library for Tenta, a sensor network management tool"
-authors = ["Moritz Makowski <moritz.makowski@tum.de>"]
+authors = [
+    { name = "Moritz Makowski", email = "moritz@dostuffthatmatters.dev" },
+]
+dependencies = ["paho-mqtt>=1.6.1"]
+requires-python = ">=3.8,<4.0"
 readme = "README.md"
-packages = [{ include = "tenta" }]
+license = { text = "MIT" }
+
+[project.urls]
 repository = "https://github.com/tum-esm/tenta-client"
 documentation = "https://tenta-python-client.netlify.app/"
-license = "MIT"
 
-[tool.poetry.dependencies]
-python = "^3.8,<4.0"
-paho-mqtt = "^1.6.1"
-
-[tool.poetry.group.dev]
-optional = true
-
-[tool.poetry.group.dev.dependencies]
-mypy = "^1.5.1"
-pytest = "^7.4.2"
-pytest-cov = "^4.1.0"
-types-paho-mqtt = "^1.6.0.7"
-pytest-order = "^1.1.0"
-pydoc-markdown = "^4.8.2"
-yapf = "^0.40.2"
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.8.0",
+    "pytest>=7.4.4",
+    "pytest-cov>=4.1.0",
+    "types-paho-mqtt>=1.6.0.20240106",
+    "pytest-order>=1.2.0",
+    "pydoc-markdown>=4.8.2",
+    "yapf>=0.40.2",
+]
 
 [tool.mypy]
 strict = true
 implicit_reexport = true
-no_warn_unused_ignores = true
 
 [tool.yapf]
 based_on_style = "facebook"
@@ -37,6 +36,10 @@ split_before_dict_set_generator = true
 each_dict_entry_on_separate_line = false
 spaces_around_subscript_colon = true
 
+[tool.pdm.build]
+includes = ["tenta"]
+excludes = ["tests", "docs"]
+
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
