@@ -1,7 +1,7 @@
 # Tenta Python Client
 
 [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/tum-esm/tenta-client/test.yml?label=tests%20on%20main%20branch)](https://github.com/tum-esm/tenta-client/actions/workflows/test.yml)
-[![GitHub](https://img.shields.io/github/license/tum-esm/tenta-client?color=f1f5f9&)](https://github.com/tum-esm/tenta-client/blob/main/LICENSE)
+[![GitHub](https://img.shields.io/github/license/tum-esm/tenta-client?color=f1f5f9)](https://github.com/tum-esm/tenta-client/blob/main/LICENSE)
 [![PyPI - Version](https://img.shields.io/github/v/tag/tum-esm/tenta-client?label=version&color=f1f5f9)](https://pypi.org/project/tenta)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/tenta?label=supported%20Python%20versions&color=f1f5f9)](https://pypi.org/project/tenta)
 

@@ -19,4 +19,4 @@ def test_static_types() -> None:
     _rmdir(".mypy_cache/3.*/example.*")
 
     for path in ["tenta/", "tests/", "example.py"]:
-        assert os.system(f"cd {PROJECT_DIR} && .venv/bin/python -m mypy {path}") == 0
+        assert os.system(f"cd {PROJECT_DIR} && python -m mypy {path}") == 0
