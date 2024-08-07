@@ -1,6 +1,6 @@
 [project]
 name = "tenta"
-version = "0.1.4"
+version = "0.1.5"
 description = "Python client library for Tenta, a sensor network management tool"
 authors = [{ name = "Moritz Makowski", email = "moritz.makowski@tum.de" }]
 dependencies = ["paho-mqtt>=2.1.0"]

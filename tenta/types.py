@@ -1,4 +1,4 @@
-from typing import Any, Literal, Optional, Union, Dict
+from typing import Any, List, Literal, Optional, Union, Dict
 
 
 class ConfigurationMessage:
@@ -101,7 +101,7 @@ class TLSParameters:
         tls_version: Optional[int] = None,
         ciphers: Optional[str] = None,
         keyfile_password: Optional[str] = None,
-        alpn_protocols: Optional[list[str]] = None,
+        alpn_protocols: Optional[List[str]] = None,
     ) -> None:
         """Create a new TLS parameters object."""
 
