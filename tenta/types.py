@@ -1,4 +1,3 @@
-import ssl
 from typing import Any, Literal, Optional, Union, Dict
 
 
@@ -98,11 +97,11 @@ class TLSParameters:
         ca_certs: Optional[str] = None,
         certfile: Optional[str] = None,
         keyfile: Optional[str] = None,
-        cert_reqs: Optional[ssl.VerifyMode] = None,
-        tls_version: Optional[ssl._SSLMethod] = None,
+        cert_reqs: Optional[Any] = None,
+        tls_version: Optional[int] = None,
         ciphers: Optional[str] = None,
-        # FIXME: I couldn't find a way to type this properly yet
-        keyfile_password: Optional[Any] = None,
+        keyfile_password: Optional[str] = None,
+        alpn_protocols: Optional[list[str]] = None,
     ) -> None:
         """Create a new TLS parameters object."""
 
@@ -113,3 +112,4 @@ class TLSParameters:
         self.tls_version = tls_version
         self.ciphers = ciphers
         self.keyfile_password = keyfile_password
+        self.alpn_protocols = alpn_protocols
