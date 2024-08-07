@@ -19,7 +19,7 @@ class TentaClient:
 
     # these variables are shared over all threads
     thread_lock = threading.Lock()
-    connection_rc_code: Optional[int] = None
+    connection_reason_code: Optional[paho.mqtt.client.ReasonCode] = None
     active_message_ids: Set[int] = set()
     latest_received_config_message: Optional[ConfigurationMessage] = None
 
@@ -84,7 +84,10 @@ class TentaClient:
 
         TentaClient.instance = self
 
-        self.client = paho.mqtt.client.Client(client_id=mqtt_client_id)
+        self.client = paho.mqtt.client.Client(
+            callback_api_version=paho.mqtt.client.CallbackAPIVersion.VERSION2,
+            client_id=mqtt_client_id,
+        )
         self.sensor_identifier = sensor_identifier
         self.receive_configs = receive_configs
 
@@ -96,10 +99,11 @@ class TentaClient:
             client: paho.mqtt.client.Client,
             userdata: Any,
             flags: Any,
-            rc: int,
+            reason_code: paho.mqtt.client.ReasonCode,
+            properties: Any,
         ) -> None:
             with TentaClient.thread_lock:
-                TentaClient.connection_rc_code = rc
+                TentaClient.connection_reason_code = reason_code
 
         # set TLS configuration if specified
 
@@ -132,22 +136,17 @@ class TentaClient:
             while True:
                 if time.time() > (start_time + connection_timeout):
                     raise TimeoutError("timed out while connecting")
-                if TentaClient.connection_rc_code is None:
+                if TentaClient.connection_reason_code is None:
                     time.sleep(0.1)
                     continue
                 else:
-                    if TentaClient.connection_rc_code == 0:
+                    if TentaClient.connection_reason_code.value == 0:
                         break
-                    raise Exception({
-                        1: "incorrect protocol",
-                        2: "invalid client id",
-                        3: "server unavailable",
-                        4: "bad username or password",
-                        5: "not authorised",
-                    }.get(
-                        TentaClient.connection_rc_code,
-                        f"unknown error code: {TentaClient.connection_rc_code}",
-                    ))
+                    raise Exception(
+                        f"Connection error ({TentaClient.connection_reason_code.value}): "
+                        +
+                        f"{TentaClient.connection_reason_code.getName()}"  # type: ignore
+                    )
         except Exception as e:
             raise ConnectionError(
                 f"Could not connect to MQTT broker at {mqtt_host}:{mqtt_port} ({e})"
@@ -156,14 +155,20 @@ class TentaClient:
         # on message publish, the message id is removed from the set of
         # active message ids and the `on_publish` callback is called
         def _on_publish(
-            client: Any,
+            client: paho.mqtt.client.Client,
             userdata: Any,
             message_id: int,
+            reason_code: paho.mqtt.client.ReasonCode,
+            properties: Any,
         ) -> None:
-            with TentaClient.thread_lock:
-                TentaClient.active_message_ids.remove(message_id)
-            if on_publish is not None:
-                on_publish(message_id)
+            if reason_code.value == 0:
+                with TentaClient.thread_lock:
+                    TentaClient.active_message_ids.remove(message_id)
+                if on_publish is not None:
+                    on_publish(message_id)
+            else:
+                # FIXME: what to do here?
+                pass
 
         # on receiving a configuration message, the structure of the
         # message is validated, the `latest_received_config_message`
@@ -366,6 +371,6 @@ class TentaClient:
         self.client.loop_stop()
         self.client.disconnect()
         TentaClient.instance = None
-        TentaClient.connection_rc_code = None
+        TentaClient.connection_reason_code = None
         TentaClient.active_message_ids = set()
         TentaClient.latest_received_config_message = None
