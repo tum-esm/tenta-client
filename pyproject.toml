@@ -2,12 +2,8 @@
 name = "tenta"
 version = "0.1.4"
 description = "Python client library for Tenta, a sensor network management tool"
-authors = [
-    { name = "Moritz Makowski", email = "moritz@dostuffthatmatters.dev" },
-]
-dependencies = [
-    "paho-mqtt>=2.1.0",
-]
+authors = [{ name = "Moritz Makowski", email = "moritz.makowski@tum.de" }]
+dependencies = ["paho-mqtt>=2.1.0"]
 requires-python = ">=3.8,<4.0"
 readme = "README.md"
 license = { text = "MIT" }
@@ -26,10 +22,10 @@ documentation = "https://tenta-python-client.netlify.app/"
 
 [project.optional-dependencies]
 dev = [
-    "mypy>=1.8.0",
-    "pytest>=7.4.4",
-    "pytest-cov>=4.1.0",
-    "pytest-order>=1.2.0",
+    "mypy>=1.11.1",
+    "pytest>=8.3.2",
+    "pytest-cov>=5.0.0",
+    "pytest-order>=1.2.1",
     "pydoc-markdown>=4.8.2",
     "yapf>=0.40.2",
 ]
